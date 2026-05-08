@@ -1,8 +1,9 @@
-from sqlalchemy import String, Text, Boolean, ForeignKey
+from enum import Enum
+from sqlalchemy import String, Text, Boolean, ForeignKey, UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.models.base import Base
 
-class NotificationType(str, SQLEnum):
+class NotificationType(str, Enum):
     contract = "contract"
     payment = "payment"
     dispute = "dispute"

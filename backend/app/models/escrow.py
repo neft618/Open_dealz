@@ -1,19 +1,20 @@
-from sqlalchemy import String, Numeric, ForeignKey, JSON
+from enum import Enum
+from sqlalchemy import String, Numeric, ForeignKey, JSON, UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.models.base import Base
 
-class EscrowTransactionType(str, SQLEnum):
+class EscrowTransactionType(str, Enum):
     lock = "lock"
     release = "release"
     refund = "refund"
     fee = "fee"
 
-class EscrowTransactionStatus(str, SQLEnum):
+class EscrowTransactionStatus(str, Enum):
     pending = "pending"
     confirmed = "confirmed"
     failed = "failed"
 
-class InitiatedBy(str, SQLEnum):
+class InitiatedBy(str, Enum):
     customer = "customer"
     executor = "executor"
     system = "system"

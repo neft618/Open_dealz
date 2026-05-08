@@ -1,14 +1,15 @@
-from sqlalchemy import String, Boolean, Integer, Text, Enum as SQLEnum, ForeignKey
+from enum import Enum
+from sqlalchemy import String, Boolean, Integer, Text, Enum as SQLEnum, ForeignKey, UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import List
 from app.models.base import Base
 
-class UserRole(str, SQLEnum):
+class UserRole(str, Enum):
     customer = "customer"
     executor = "executor"
     admin = "admin"
 
-class Specialization(str, SQLEnum):
+class Specialization(str, Enum):
     web_development = "web_development"
     mobile_development = "mobile_development"
     data_science = "data_science"

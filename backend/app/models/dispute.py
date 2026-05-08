@@ -1,14 +1,15 @@
-from sqlalchemy import String, Text, ForeignKey, DateTime
+from enum import Enum
+from sqlalchemy import String, Text, ForeignKey, DateTime, UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import List
 from app.models.base import Base
 
-class DisputeStatus(str, SQLEnum):
+class DisputeStatus(str, Enum):
     open = "open"
     under_review = "under_review"
     resolved = "resolved"
 
-class DisputeResolution(str, SQLEnum):
+class DisputeResolution(str, Enum):
     executor = "executor"
     customer = "customer"
     shared = "shared"

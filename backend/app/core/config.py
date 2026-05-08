@@ -19,6 +19,6 @@ class Settings(BaseSettings):
     supabase_storage_bucket_deliverables: str = "deliverables"
 
     class Config:
-        env_file = ".env"
+        pass
 
 settings = Settings()
