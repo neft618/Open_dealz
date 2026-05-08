@@ -9,4 +9,4 @@ ENV PATH=/app/node_modules/.bin:$PATH
 
 COPY . .
 
-CMD ["npx", "react-scripts", "start"]
+CMD ["./node_modules/.bin/react-scripts", "start"]
