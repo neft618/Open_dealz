@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { useCurrentRole } from '../../hooks/useCurrentRole';
 import { useNotificationStore } from '../../store/notificationStore';
-import { Bell, User, Settings } from 'lucide-react';
+import { Bell, User } from 'lucide-react';
 
 const Navbar = () => {
   const { user, logout } = useAuth();

@@ -5,7 +5,7 @@ from app.schemas.order import OrderCreateRequest, OrderResponse, OrderListRespon
 from app.services.order_service import create_order, list_orders, get_order_detail, update_order, cancel_order, apply_to_order, list_applications, accept_application
 from app.dependencies import get_current_active_user
 from app.models.user import User
-from typing import Optional
+from typing import Optional, List
 from decimal import Decimal
 
 router = APIRouter()

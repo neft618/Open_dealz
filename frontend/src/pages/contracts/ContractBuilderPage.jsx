@@ -6,6 +6,7 @@ import api from '../../api/client';
 import ClauseEditor from '../../components/contract/ClauseEditor';
 import SortableClause from '../../components/contract/SortableClause';
 import Button from '../../components/ui/Button';
+import Input from '../../components/ui/Input';
 import toast from 'react-hot-toast';
 
 const steps = [

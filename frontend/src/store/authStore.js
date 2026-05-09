@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import api from '../api/client';
 
 const useAuthStore = create((set, get) => ({
   user: null,
@@ -28,4 +29,4 @@ const useAuthStore = create((set, get) => ({
   getCurrentRole: () => get().user?.role,
 }));
 
-export default useAuthStore;
+export { useAuthStore };

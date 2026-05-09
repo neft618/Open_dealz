@@ -26,6 +26,7 @@ class User(Base):
     role: Mapped[UserRole] = mapped_column(SQLEnum(UserRole), default=UserRole.customer)
     is_verified: Mapped[bool] = mapped_column(Boolean, default=False)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
+    wallet_address: Mapped[str] = mapped_column(String(42), nullable=True)
 
     profile: Mapped["Profile"] = relationship("Profile", back_populates="user", uselist=False)
     orders: Mapped[List["Order"]] = relationship("Order", back_populates="customer")
@@ -41,12 +42,10 @@ class Profile(Base):
 
     user_id: Mapped[UUID] = mapped_column(ForeignKey("users.id"), unique=True)
     bio: Mapped[str] = mapped_column(Text, nullable=True)
-    skills: Mapped[str] = mapped_column(String, nullable=True)
     specialization: Mapped[Specialization] = mapped_column(SQLEnum(Specialization), nullable=True)
-    rating: Mapped[int] = mapped_column(Integer, default=0)
-    contracts_count: Mapped[int] = mapped_column(Integer, default=0)
 
     user: Mapped["User"] = relationship("User", back_populates="profile")
+    skills: Mapped[List["ProfileSkill"]] = relationship("ProfileSkill", back_populates="profile")
     portfolios: Mapped[List["Portfolio"]] = relationship("Portfolio", back_populates="profile")
 
 class Portfolio(Base):

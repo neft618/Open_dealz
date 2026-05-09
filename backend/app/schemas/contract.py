@@ -4,7 +4,7 @@ from datetime import date, datetime
 from decimal import Decimal
 from app.models.contract import ContractStatus, PaymentType, ClauseType
 from app.models.order import OrderStatus
-from app.models.application import ApplicationStatus
+from app.models.order import ApplicationStatus
 
 class ContractClauseUpdate(BaseModel):
     id: str

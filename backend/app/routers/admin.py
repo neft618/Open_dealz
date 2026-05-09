@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, Query, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.future import select, func, update
+from sqlalchemy import select, func, update
 from app.core.database import get_db
 from app.dependencies import require_admin
 from app.models.user import User

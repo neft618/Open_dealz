@@ -23,6 +23,8 @@ const useNotificationStore = create((set, get) => ({
   },
 }));
 
+export { useNotificationStore };
+
 // Polling every 30s
 setInterval(() => {
   useNotificationStore.getState().fetchUnreadCount();

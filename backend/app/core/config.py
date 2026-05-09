@@ -13,10 +13,10 @@ class Settings(BaseSettings):
     smtp_username: Optional[str] = None
     smtp_password: Optional[str] = None
     platform_fee_percent: float = 3.0
-    supabase_url: str
-    supabase_service_role_key: str
-    supabase_storage_bucket_portfolios: str = "portfolios"
-    supabase_storage_bucket_deliverables: str = "deliverables"
+    supabase_url: Optional[str] = None
+    supabase_service_role_key: Optional[str] = None
+    supabase_storage_bucket_portfolios: Optional[str] = None
+    supabase_storage_bucket_deliverables: Optional[str] = None
 
     class Config:
         pass

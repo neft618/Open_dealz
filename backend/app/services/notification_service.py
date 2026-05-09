@@ -1,5 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.future import select
+from sqlalchemy import select
 from app.models.notification import Notification
 from app.models.user import User
 from app.schemas.notification import NotificationResponse

@@ -1,5 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.future import select
+from sqlalchemy import select
 from fastapi import HTTPException
 from app.models.user import User, Profile
 from app.models.audit import AuditLog

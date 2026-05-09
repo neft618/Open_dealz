@@ -1,5 +1,7 @@
+from datetime import datetime
+from decimal import Decimal
 from enum import Enum
-from sqlalchemy import String, Text, Date, Numeric, ForeignKey, Boolean, DateTime, Integer, UUID
+from sqlalchemy import String, Text, Date, Numeric, ForeignKey, Boolean, DateTime, Integer, UUID, Enum as SQLEnum, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import List
 from app.models.base import Base
@@ -28,6 +30,12 @@ class ClauseType(str, Enum):
     ip_rights = "ip_rights"
     confidentiality = "confidentiality"
 
+class MilestoneStatus(str, Enum):
+    pending = "pending"
+    in_progress = "in_progress"
+    approved = "approved"
+    rejected = "rejected"
+
 class ContractClause(Base):
     __tablename__ = "contract_clauses"
 
@@ -39,11 +47,29 @@ class ContractClause(Base):
 
     contract: Mapped["Contract"] = relationship("Contract", back_populates="clauses")
 
-class MilestoneStatus(str, SQLEnum):
-    pending = "pending"
-    in_progress = "in_progress"
-    approved = "approved"
-    rejected = "rejected"
+class Contract(Base):
+    __tablename__ = "contracts"
+
+    order_id: Mapped[UUID] = mapped_column(ForeignKey("orders.id"), unique=True)
+    customer_id: Mapped[UUID] = mapped_column(ForeignKey("users.id"))
+    executor_id: Mapped[UUID] = mapped_column(ForeignKey("users.id"))
+    status: Mapped[ContractStatus] = mapped_column(SQLEnum(ContractStatus), default=ContractStatus.draft)
+    total_amount: Mapped[Decimal] = mapped_column(Numeric(12, 2))
+    platform_fee: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=0)
+    payment_type: Mapped[PaymentType] = mapped_column(SQLEnum(PaymentType))
+    signed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True)
+    customer_signed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True)
+    executor_signed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True)
+
+    order: Mapped["Order"] = relationship("Order", back_populates="contract")
+    customer: Mapped["User"] = relationship("User", foreign_keys=[customer_id], back_populates="contracts_as_customer")
+    executor: Mapped["User"] = relationship("User", foreign_keys=[executor_id], back_populates="contracts_as_executor")
+    clauses: Mapped[List["ContractClause"]] = relationship("ContractClause", back_populates="contract", order_by="ContractClause.position")
+    milestones: Mapped[List["Milestone"]] = relationship("Milestone", back_populates="contract", order_by="Milestone.position")
+    deliverables: Mapped[List["Deliverable"]] = relationship("Deliverable", back_populates="contract")
+    escrow_transactions: Mapped[List["EscrowTransaction"]] = relationship("EscrowTransaction", back_populates="contract")
+    dispute: Mapped["Dispute"] = relationship("Dispute", back_populates="contract", uselist=False)
+    reviews: Mapped[List["Review"]] = relationship("Review", back_populates="contract")
 
 class Milestone(Base):
     __tablename__ = "milestones"

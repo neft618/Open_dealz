@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.future import select, update
+from sqlalchemy import select, update
 from app.core.database import get_db
 from app.schemas.notification import NotificationResponse, NotificationListResponse
 from app.dependencies import get_current_active_user

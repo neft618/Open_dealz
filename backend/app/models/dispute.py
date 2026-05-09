@@ -1,5 +1,6 @@
+from datetime import datetime
 from enum import Enum
-from sqlalchemy import String, Text, ForeignKey, DateTime, UUID
+from sqlalchemy import String, Text, ForeignKey, DateTime, UUID, Enum as SQLEnum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import List
 from app.models.base import Base
@@ -17,7 +18,7 @@ class DisputeResolution(str, Enum):
 class Dispute(Base):
     __tablename__ = "disputes"
 
-    contract_id: Mapped[UUID] = mapped_column(ForeignKey("contracts.id"), unique=True)
+    contract_id: Mapped[UUID] = mapped_column(ForeignKey("contracts.id"))
     initiated_by_id: Mapped[UUID] = mapped_column(ForeignKey("users.id"))
     status: Mapped[DisputeStatus] = mapped_column(SQLEnum(DisputeStatus), default=DisputeStatus.open)
     resolution: Mapped[DisputeResolution] = mapped_column(SQLEnum(DisputeResolution), nullable=True)

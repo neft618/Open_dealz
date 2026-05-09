@@ -1,5 +1,6 @@
+from decimal import Decimal
 from enum import Enum
-from sqlalchemy import String, Numeric, ForeignKey, JSON, UUID
+from sqlalchemy import String, Numeric, ForeignKey, JSON, UUID, Enum as SQLEnum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.models.base import Base
 
@@ -18,6 +19,7 @@ class InitiatedBy(str, Enum):
     customer = "customer"
     executor = "executor"
     system = "system"
+    shared = "shared"
 
 class EscrowTransaction(Base):
     __tablename__ = "escrow_transactions"

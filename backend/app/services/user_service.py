@@ -1,9 +1,9 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.future import select
+from sqlalchemy import select
 from fastapi import HTTPException, UploadFile
 from app.models.user import User, Profile, Portfolio
 from app.models.audit import AuditLog
-from app.schemas.user import ProfileUpdateRequest, RoleUpdateRequest, PortfolioItem
+from app.schemas.user import ProfileUpdateRequest, RoleUpdateRequest, PortfolioItem, ProfileResponse
 from app.core.security import generate_tx_hash
 from app.core.storage import upload_file, delete_file
 from datetime import datetime, UTC

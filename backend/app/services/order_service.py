@@ -1,5 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.future import select
+from sqlalchemy import select
 from sqlalchemy import func
 from fastapi import HTTPException
 from app.models.order import Order, Application
@@ -8,7 +8,8 @@ from app.models.audit import AuditLog
 from app.schemas.order import OrderCreateRequest, OrderResponse, ApplicationCreateRequest, ApplicationResponse, AcceptApplicationRequest
 from app.core.security import generate_tx_hash
 from datetime import datetime, UTC
-from typing import List
+from typing import List, Optional
+from decimal import Decimal
 
 async def create_order(db: AsyncSession, data: OrderCreateRequest, customer_id: str) -> Order:
     order = Order(

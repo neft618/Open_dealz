@@ -2,8 +2,7 @@ from pydantic import BaseModel
 from typing import Optional, List
 from datetime import date
 from decimal import Decimal
-from app.models.order import OrderStatus
-from app.models.application import ApplicationStatus
+from app.models.order import OrderStatus, ApplicationStatus
 
 class OrderCreateRequest(BaseModel):
     title: str

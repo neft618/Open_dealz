@@ -1,6 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.future import select
+from sqlalchemy import select
 from fastapi import HTTPException, UploadFile
+from typing import Optional
 from app.models.dispute import Dispute, DisputeMessage
 from app.models.contract import Contract
 from app.models.audit import AuditLog

@@ -6,7 +6,7 @@ from jose import JWTError
 from app.core.database import get_db
 from app.core.security import decode_token
 from app.models.user import User
-from sqlalchemy.future import select
+from sqlalchemy import select
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
 
